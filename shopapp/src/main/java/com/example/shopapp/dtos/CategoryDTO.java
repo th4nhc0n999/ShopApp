@@ -15,5 +15,4 @@ import lombok.Setter;
 public class CategoryDTO {
     @NotBlank(message = "Name must not be empty")
     private String name;
-    private String description;
 }

@@ -19,8 +19,8 @@ import lombok.Setter;
 public class OrderDTO {
 
     @JsonProperty("user_id")
-    @Min(value = 1, message="user 's must be > 0")
-    private String userId;
+    @Min(value = 1, message = "user 's must be > 0")
+    private Long userId;
 
     @JsonProperty("fullname")
     private String fullName;
@@ -28,8 +28,8 @@ public class OrderDTO {
     private String email;
 
     @JsonProperty("phone_number")
-    @NotBlank(message="phone number is required")
-    @Size(min = 5,message="Phone must be > 5 characters")
+    @NotBlank(message = "phone number is required")
+    @Size(min = 5, message = "Phone must be > 5 characters")
     private String phoneNumber;
 
     private String address;
@@ -37,15 +37,15 @@ public class OrderDTO {
     private String note;
 
     @JsonProperty("total_money")
-    @Min(value = 0,message="total money must be >= 0")
+    @Min(value = 0, message = "total money must be >= 0")
     private Float totalMoney;
 
     @JsonProperty("shipping_method")
-    private Float shippingMethod;
+    private String shippingMethod;
 
     @JsonProperty("shipping_address")
-    private Float shippingAddress;
+    private String shippingAddress;
 
     @JsonProperty("payment_method")
-    private Float paymentMethod;
+    private String paymentMethod;
 }
