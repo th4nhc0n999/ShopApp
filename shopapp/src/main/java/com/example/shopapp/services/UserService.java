@@ -35,16 +35,18 @@ public class UserService implements IUserService {
                 .phoneNumber(userDTO.getPhoneNumber())
                 .password(userDTO.getPassword())
                 .address(userDTO.getAddress())
-                .dateOfBirth(userDTO.getDateOfBirth())
-                .facebookAccountId(userDTO.getFacebookAccountId())
-                .googleAccountId(userDTO.getGoogleAccountId())
+                .dateOfBirth(userDTO.getDateOfBirth() != null ? new java.sql.Date(userDTO.getDateOfBirth().getTime()).toLocalDate() : null)
+                .facebookAccountId(userDTO.getFacebookAccountId() == null ? 0 : userDTO.getFacebookAccountId())
+                .googleAccountId(userDTO.getGoogleAccountId() == null ? 0 : userDTO.getGoogleAccountId())
                 .build();
 
         Role role = roleRepository.findById(userDTO.getRoleId())
                 .orElseThrow(() -> new DataNotFoundException("Role not found"));
         newUser.setRoleId(role);
 
-        if (userDTO.getFacebookAccountId() == 0 && userDTO.getGoogleAccountId() == 0) {
+        int facebookAccountId = userDTO.getFacebookAccountId() == null ? 0 : userDTO.getFacebookAccountId();
+        int googleAccountId = userDTO.getGoogleAccountId() == null ? 0 : userDTO.getGoogleAccountId();
+        if (facebookAccountId == 0 && googleAccountId == 0) {
             String password = userDTO.getPassword();
             String encodedPassword = passwordEncoder.encode(password);
             newUser.setPassword(encodedPassword);

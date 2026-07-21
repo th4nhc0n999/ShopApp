@@ -37,13 +37,14 @@ public class UserDTO {
     private String retypePassword;
 
     @JsonProperty("date_of_birth")
-    private LocalDate dateOfBirth;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
+    private java.util.Date dateOfBirth;
 
     @JsonProperty("facebook_account_id")
-    private int facebookAccountId;
+    private Integer facebookAccountId;
 
     @JsonProperty("google_account_id")
-    private int googleAccountId;
+    private Integer googleAccountId;
 
     @NotNull(message = "Role ID is required")
     @JsonProperty("role_id")

@@ -45,7 +45,7 @@ public class ProductController {
     public ResponseEntity<ProductListResponse> getAllProduct(
             @RequestParam("page") int page,
             @RequestParam("limit") int limit) {
-        PageRequest pageRequest = PageRequest.of(page, limit, Sort.by("createAt").descending());
+        PageRequest pageRequest = PageRequest.of(page, limit, Sort.by("createdAt").descending());
         Page<ProductResponse> productPage = iProductService.getAllProducts(pageRequest);
         int totalPage = productPage.getTotalPages();
         List<ProductResponse> products = productPage.getContent();
@@ -133,7 +133,7 @@ public class ProductController {
         return uniqueFilename;
     }
 
-    @PostMapping(value = "uploads/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "uploads/{product_id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadImages(
             @ModelAttribute("files") List<MultipartFile> files,
             @PathVariable("product_id") Long productId) {
